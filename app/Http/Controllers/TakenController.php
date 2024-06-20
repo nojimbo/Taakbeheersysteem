@@ -23,7 +23,9 @@ class TakenController extends Controller
             "taskStatus" => $request->get("taskStatus")
         ]);
         // return view('create');
-        return response()->json($task);
+        return view('create', [
+            "task" => $task 
+        ]);
     }
 
     public function show(Request $request)

@@ -1,12 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TakenController;
 
-Route::get("/index", [TakenController::class,  "index"]);
+Route::view('/', 'welcome');
 
-Route::get("/show", [TakenController::class,  "show"]);
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-Route::get("/create", [TakenController::class,  "create"]);
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
 
-Route::get("/edit", [TakenController::class,  "edit"]);
+require __DIR__.'/auth.php';
