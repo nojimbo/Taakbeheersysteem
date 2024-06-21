@@ -8,39 +8,50 @@ use Illuminate\Http\Request;
 
 class TakenController extends Controller
 {
-    public function index(Request $request)
+    public function createGet(Request $request)
     {
-        // Read
-        return response()->json($tasks);
+        
+        
+        // return view('create');
+        return view('TaskControl.create', []);
     }
 
-    public function create(Request $request)
+    public function createPost(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'notes' => 'required|string',
+            'status' => 'required|string',
+        ]);
         // Create task
-        $task = Tasks::create([
-            "taskName" => $request->get("taskName"),
-            "taskDescription" => $request->get("taskDescription"),
-            "taskStatus" => $request->get("taskStatus")
+        Tasks::create([
+            "name" => $validatedData["name"],
+            "description" => $validatedData["description"],
+            "notes" => $validatedData["notes"],
+            "status" => $validatedData["status"]
         ]);
-        // return view('create');
-        return view('create', [
-            "task" => $task 
-        ]);
+        return redirect()->route('show')->with('success', 'Task created successfully');
     }
 
     public function show(Request $request)
     {
-        // Read
-        $tasks = Tasks::where("taskName",$request->get("taskName"))
-                        ->where("taskDescription",$request->get("taskDescription"))
-                        ->where("taskStatus",$request->get("taskStatus"))
-                        ->get();
-        return response()->json($tasks);
+        // Show all tasks and filtered tasks
+        $tasks = Tasks::all();
+        // if () {
+        //     $tasks = Tasks::where("taskName",$request->get("taskName"))
+        //                 ->where("taskDescription",$request->get("taskDescription"))
+        //                 ->where("taskStatus",$request->get("taskStatus"))
+        //                 ->get();
+        // }
+        return view('TaskControl.show', [
+            "tasks" => $tasks
+        ]);
     }
 
     public function edit(Request $request)
     {
         // edit
-        return response()->json($tasks);
+        return view('TaskControl.edit', [        ]);
     }
 }

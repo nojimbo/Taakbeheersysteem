@@ -13,5 +13,6 @@ class Tasks extends Model
         'taskName',
         'taskDescription',
         'taskStatus',
+        //add notes collum
     ];
 }
