@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\User::class);
             $table->string("task");
-            $table->string("description")->nullable();
-            $table->string("notes")->nullable();
+            $table->text("description")->nullable();
+            $table->text("notes")->nullable();
             $table->enum("status", ['open','active','done'])->default('open');
             $table->timestamps();
         });

@@ -14,6 +14,5 @@ class Task extends Model
         'description',
         'notes',
         'status',
-        //add notes collum
     ];
 }
