@@ -9,7 +9,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    @livewire('taskList')
+                    @if(Route::currentRouteName() == 'dashboard.show')
+                        @livewire('Show')
+                    @elseif(Route::currentRouteName() == 'dashboard.create')
+                        @livewire('Create')
+                    @elseif(Route::currentRouteName() == 'dashboard.edit')
+                        @livewire('Edit')
+                    @else
+                        {{ 'you are logged in' }}
+                    @endif
                 </div>
             </div>
         </div>
