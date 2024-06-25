@@ -50,9 +50,13 @@ class User extends Authenticatable
         return $this->hasMany(Task::class)->orderBy('created_at', 'desc');
     }
 
-    public function filter($name = null, $status = null, $dateRange = null)
+    public function filter($id = null, $name = null, $status = null, $dateRange = null)
     {
-        return $this->hasMany(Task::class)->where(function($query) use ($name, $status, $dateRange) {
+        return $this->hasMany(Task::class)->where(function($query) use ($id, $name, $status, $dateRange) {
+            if ($id) {
+                $query->where('id', $id);
+            }
+
             if ($name) {
                 $query->where('name', $name);
             }

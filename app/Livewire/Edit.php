@@ -13,9 +13,25 @@ class Edit extends Component
     public string $notes;
     public string $status;
 
+    function mount(): void
+    {
+        $this->tasks = auth()->user()->filter()->get();
+    }
+
+    function editTask(Task $task): void
+    {
+        $task->task = $this->task;
+        $task->description = $this->description;
+        $task->notes = $this->notes;
+        $task->status = $this->status;
+        $task->save();
+        $this->redirectRoute('show');
+    }
+
     function deleteTask(Task $task): void
     {
         $task->delete();
+        $this->redirectRoute('show');
     }
 
     function markAsDone(Task $task): void
@@ -23,8 +39,6 @@ class Edit extends Component
         $task->status = 'done';
         $task->save();
     }
-
-    
 
     public function render()
     {

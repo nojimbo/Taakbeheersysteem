@@ -18,7 +18,7 @@
                     <td class="p-3 text-sm">{{$task->description}}</td>
                     <td class="p-3 text-sm">{{$task->status}}</td>
                     <td class="p-3 text-sm">{{$task->notes}}</td>
-                    <td><x-secondary-button wire:click="">Edit</x-secondary-button></td>
+                    <td><x-secondary-button :href="route('edit', ['id'=>$task->id])" wire:navigate>Edit</x-secondary-button></td>
                 </tr>
             @empty
                 <td colspan="4" class="p-3 text-sm text-center text-gray-300">Task list is empty.</td>

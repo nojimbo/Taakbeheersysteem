@@ -15,14 +15,14 @@ Route::group(['middleware' => ['auth', /*'verified'*/]], function () {
     Route::view('dashboard', 'dashboard')
         ->name('dashboard');
 
-    Route::view('dashboard.show', 'dashboard')
-        ->name('dashboard.show');
+    Route::view('task-list', 'dashboard')
+        ->name('show');
 
-    Route::view('dashboard.create', 'dashboard')
-        ->name('dashboard.create');
+    Route::view('create-task', 'dashboard')
+        ->name('create');
 
-    Route::view('dashboard.edit', 'dashboard')
-        ->name('dashboard.edit');
+    Route::view('edit-task', 'dashboard')
+        ->name('edit');
 });
 
 
