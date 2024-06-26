@@ -4,15 +4,21 @@ namespace App\Livewire;
 
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Create extends Component
 {
     public $tasks;
-    public string $task;
-    public ?string $description;
-    public ?string $notes;
-    public string $status;
+
+    #[Validate('required|min:5')]
+    public string $task = '';
+
+    public ?string $description = null;
+
+    public ?string $notes = null;
+
+    public string $status = 'open';
 
     function createTask(): void
     {
@@ -22,10 +28,10 @@ class Create extends Component
             $task->task = $this->task;
             $task->description = $this->description;
             $task->notes = $this->notes;
-            // $task->status = $this->status;
             $task->save();
             $this->reset(['task', 'description', 'notes', 'status']);
-        }   //have to refresh after the for the tasks after the first one to show up, but after refreshing the page it updates immediatly.
+            $this->dispatch('added');
+        }
     }
 
     public function render()

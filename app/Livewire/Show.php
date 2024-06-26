@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Task;
 use Livewire\Component;
 
 class Show extends Component
@@ -27,6 +28,12 @@ class Show extends Component
     function sortTasks(): void
     {
         $this->tasks = auth()->user()->sort;
+    }
+
+    function deleteTask(Task $task): void
+    {
+        $task->delete();
+        $this->redirectRoute('show');
     }
 
     public function render()

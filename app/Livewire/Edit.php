@@ -28,12 +28,6 @@ class Edit extends Component
         $this->redirectRoute('show');
     }
 
-    function deleteTask(Task $task): void
-    {
-        $task->delete();
-        $this->redirectRoute('show');
-    }
-
     function markAsDone(Task $task): void
     {
         $task->status = 'done';
