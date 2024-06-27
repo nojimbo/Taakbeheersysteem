@@ -16,8 +16,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\User::class);
             $table->string("task");
             $table->text("description")->nullable();
-            $table->text("notes")->nullable();
-            $table->enum("status", ['open','active','done'])->default('open');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

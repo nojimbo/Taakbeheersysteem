@@ -11,14 +11,14 @@ class Create extends Component
 {
     public $tasks;
 
-    #[Validate('required|min:5')]
+    #[Validate('required|max:255')]
     public string $task = '';
 
+    #[Validate('max:255')]
     public ?string $description = null;
 
-    public ?string $notes = null;
-
-    public string $status = 'open';
+    #[Validate('required|boolean')]
+    public bool $status = false;
 
     function createTask(): void
     {
@@ -27,9 +27,8 @@ class Create extends Component
             $task->user_id = Auth::id();
             $task->task = $this->task;
             $task->description = $this->description;
-            $task->notes = $this->notes;
             $task->save();
-            $this->reset(['task', 'description', 'notes', 'status']);
+            $this->reset(['task', 'description']);
             $this->dispatch('added');
         }
     }

@@ -3,35 +3,36 @@
 namespace App\Livewire;
 
 use App\Models\Task;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Edit extends Component
 {
     public $tasks;
-    public string $task;
-    public ?string $description;
-    public string $notes;
-    public string $status;
 
-    function mount(): void
+    #[Validate('required|max:255')]
+    public string $task = '';
+
+    #[Validate('max:255')]
+    public ?string $description = null;
+
+    function mount($id): void
     {
-        $this->tasks = auth()->user()->filter()->get();
+        $this->tasks = Task::find($id);
     }
 
-    function editTask(Task $task): void
+    function editTask(Task $task)
     {
-        $task->task = $this->task;
-        $task->description = $this->description;
-        $task->notes = $this->notes;
-        $task->status = $this->status;
-        $task->save();
-        $this->redirectRoute('show');
-    }
+        if ($this->task) {
+            $task->task = $this->task;
+        }
+        if($this->description) {
+            $task->description = $this->description;
 
-    function markAsDone(Task $task): void
-    {
-        $task->status = 'done';
+        }
         $task->save();
+        $this->dispatch('updated');
+        $this->redirectRoute('dashboard');
     }
 
     public function render()

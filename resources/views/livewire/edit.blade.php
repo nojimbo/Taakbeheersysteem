@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit="editTask" class="flex flex-col justify-center">
+    <form wire:submit="editTask({{$_GET['id']}})" class="flex flex-col justify-center">
         @csrf
         <x-input-label for="task" :value="__('task')" />
         <x-text-input wire:model="task"
@@ -7,32 +7,21 @@
                       class="bg-gray-800 block mt-1 w-full"
                       type="text"
                       name="task"
-                      value=""
-                      required />
+                      placeholder="{{$tasks->task}}" />
         <x-input-error :messages="$errors->get('task')" class="mt-2" />
 
-        <x-input-label for="description" :value="__('description')" />
+        <x-input-label for="description" :value="__('description')" class="mt-4" />
         <x-text-input wire:model="description"
                       id="description"
                       class="bg-gray-800 block mt-1 w-full"
                       type="text"
                       name="description"
-                      value=""
+                      placeholder="{{$tasks->description}}"
                       autocomplete="off" />
         <x-input-error :messages="$errors->get('description')" class="mt-2" />
 
-        <x-input-label for="notes" :value="__('notes')" />
-        <x-text-input wire:model="notes"
-                      id="notes"
-                      class="bg-gray-800 block mt-1 w-full"
-                      type="text"
-                      name="notes"
-                      value=""
-                      autocomplete="off" />
-        <x-input-error :messages="$errors->get('notes')" class="mt-2" />
-
         <div class="w-full flex items-center">
-            <x-action-message on="added" class="mt-2 w-full">
+            <x-action-message on="updated" class="mt-2 w-full">
                 {{__('Task updated.')}}
             </x-action-message>
 

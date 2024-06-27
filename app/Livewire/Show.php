@@ -3,37 +3,16 @@
 namespace App\Livewire;
 
 use App\Models\Task;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Show extends Component
 {
     public $tasks;
-    public string $task;
 
-    function mount(): void
+    function mount($id): void
     {
-        $this->fetchTasks();
-    }
-
-    function fetchTasks(): void
-    {
-        $this->tasks = auth()->user()->Tasks;
-    }
-
-    function filterTasks(): void
-    {
-        $this->tasks = auth()->user()->filter;
-    }
-
-    function sortTasks(): void
-    {
-        $this->tasks = auth()->user()->sort;
-    }
-
-    function deleteTask(Task $task): void
-    {
-        $task->delete();
-        $this->redirectRoute('show');
+        $this->tasks = Task::find($id);
     }
 
     public function render()

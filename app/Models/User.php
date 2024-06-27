@@ -49,30 +49,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Task::class)->orderBy('created_at', 'desc');
     }
-
-    public function filter($id = null, $name = null, $status = null, $dateRange = null)
-    {
-        return $this->hasMany(Task::class)->where(function($query) use ($id, $name, $status, $dateRange) {
-            if ($id) {
-                $query->where('id', $id);
-            }
-
-            if ($name) {
-                $query->where('name', $name);
-            }
-
-            if ($status) {
-                $query->where('status', $status);
-            }
-
-            if ($dateRange) {
-                $query->whereBetween('created_at', $dateRange);
-            }
-        });
-    }
-
-    public function sort($collum = 'created_at', $direction = 'asc')
-    {
-        return $this->hasMany(Task::class)->orderBy($collum, $direction);
-    }
 }
