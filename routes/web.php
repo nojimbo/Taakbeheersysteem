@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\TaskController;
+use App\Livewire\Create;
+use App\Livewire\Edit;
+use App\Livewire\Show;
+use App\Livewire\TaskList;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')
@@ -12,19 +16,20 @@ Route::view('profile', 'profile')
 
 Route::group(['middleware' => ['auth', /*'verified'*/]], function () {
 
-    Route::view('task-list', 'dashboard')
+    Route::view('dashboard', 'dashboard')
+        ->name('dashboard');
+
+    Route::get('/tasks/list', TaskList::class)
         ->name('list');
 
-    Route::view('show-task', 'dashboard')
+    Route::get('/tasks/show', Show::class)
         ->name('show');
 
-    Route::view('create-task', 'dashboard')
+    Route::get('/tasks/create', Create::class)
         ->name('create');
 
-    Route::view('edit-task', 'dashboard')
+    Route::get('/tasks/edit', Edit::class)
         ->name('edit');
 });
-
-//Route::resource('TaskController', TaskController::class);
 
 require __DIR__.'/auth.php';

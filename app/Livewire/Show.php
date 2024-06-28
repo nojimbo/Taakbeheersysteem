@@ -3,18 +3,22 @@
 namespace App\Livewire;
 
 use App\Models\Task;
+use Illuminate\Http\Request;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Show extends Component
 {
-    public $tasks;
+    public $task;
 
-    function mount($id): void
+    function mount(Request $request): void
     {
-        $this->tasks = Task::find($id);
+        (int)$id = $request->input('id');
+        $this->task = Task::find($id);
     }
 
+    #[Title('Task Details')]
     public function render()
     {
         return view('livewire.show');

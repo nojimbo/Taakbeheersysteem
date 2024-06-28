@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Task;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -10,13 +11,15 @@ class TaskList extends Component
 {
     public $tasks;
 
-    #[Validate('required|max:255')]
-    public string $task = '';
-
     #[Validate('required|boolean')]
     public bool $status = false;
 
     function mount(): void
+    {
+        $this->fetchTasks();
+    }
+
+    function fetchTasks(): void
     {
         $this->tasks = auth()->user()->Tasks;
     }
@@ -24,7 +27,8 @@ class TaskList extends Component
     function deleteTask(Task $task): void
     {
         $task->delete();
-        $this->mount();
+        $this->fetchTasks();
+        $this->dispatch('deleted');
     }
 
     function changeStatus(Task $task): void
@@ -35,9 +39,10 @@ class TaskList extends Component
             $task->status = true;
         }
         $task->save();
-        $this->mount();
+        $this->fetchTasks();
     }
 
+    #[Title('Task List')]
     public function render()
     {
         return view('livewire.task-list');

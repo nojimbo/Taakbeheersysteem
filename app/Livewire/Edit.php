@@ -3,28 +3,32 @@
 namespace App\Livewire;
 
 use App\Models\Task;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Edit extends Component
 {
-    public $tasks;
+    public $task;
 
     #[Validate('required|max:255')]
-    public string $task = '';
+    public string $name = '';
 
     #[Validate('max:255')]
     public ?string $description = null;
 
-    function mount($id): void
+    function mount(Request $request): void
     {
-        $this->tasks = Task::find($id);
+        (int)$id = $request->input('id');
+        $this->task = Task::find($id);
     }
 
     function editTask(Task $task)
     {
-        if ($this->task) {
-            $task->task = $this->task;
+        if ($this->name) {
+            $task->name = $this->name;
         }
         if($this->description) {
             $task->description = $this->description;
@@ -32,9 +36,10 @@ class Edit extends Component
         }
         $task->save();
         $this->dispatch('updated');
-        $this->redirectRoute('dashboard');
+        $this->redirectRoute('list');
     }
 
+    #[Title('Edit Task')]
     public function render()
     {
         return view('livewire.edit');

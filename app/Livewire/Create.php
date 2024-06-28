@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -33,6 +34,7 @@ class Create extends Component
         }
     }
 
+    #[Title('Create Task')]
     public function render()
     {
         return view('livewire.create');
