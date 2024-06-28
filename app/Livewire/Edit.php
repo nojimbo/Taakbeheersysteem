@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -39,7 +38,13 @@ class Edit extends Component
         $this->redirectRoute('list');
     }
 
-    #[Title('Edit Task')]
+    function deleteTask(Task $task): void
+    {
+        $task->delete();
+        $this->redirectRoute('list');
+    }
+
+    #[Title('Task manager | Edit Task')]
     public function render()
     {
         return view('livewire.edit');

@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Livewire\Attributes\Title;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Show extends Component
@@ -18,7 +17,13 @@ class Show extends Component
         $this->task = Task::find($id);
     }
 
-    #[Title('Task Details')]
+    function deleteTask(Task $task): void
+    {
+        $task->delete();
+        $this->redirectRoute('list');
+    }
+
+    #[Title('Task manager | Task Details')]
     public function render()
     {
         return view('livewire.show');

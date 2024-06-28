@@ -14,7 +14,7 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::group(['middleware' => ['auth', /*'verified'*/]], function () {
+Route::group(['middleware' => ['auth'/*, 'verified'*/]], function () {
 
     Route::view('dashboard', 'dashboard')
         ->name('dashboard');

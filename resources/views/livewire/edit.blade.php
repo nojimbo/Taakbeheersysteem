@@ -30,7 +30,7 @@
                         </x-action-message>
 
                         <div class="mt-2 w-full flex justify-end">
-                            <x-primary-button type="submit">
+                            <x-primary-button type="submit" class="">
                                 Save
                             </x-primary-button>
                         </div>

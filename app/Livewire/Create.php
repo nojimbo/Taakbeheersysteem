@@ -34,7 +34,7 @@ class Create extends Component
         }
     }
 
-    #[Title('Create Task')]
+    #[Title('Task manager | Create Task')]
     public function render()
     {
         return view('livewire.create');

@@ -42,7 +42,7 @@ class TaskList extends Component
         $this->fetchTasks();
     }
 
-    #[Title('Task List')]
+    #[Title('Task manager | Task List')]
     public function render()
     {
         return view('livewire.task-list');

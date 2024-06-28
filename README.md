@@ -1,5 +1,30 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# TaakbeheerSysteem
 
+## Installatie
+
+1. Clone de repository:
+   ```bash
+   git clone https://github.com/nojimbo/Taakbeheersysteem.git
+   cd Taakbeheersysteem
+
+2. Installeer de afhankelijkheden:
+   ```bash
+   composer install
+   npm install
+   npm run dev
+
+3. Configureer de database:
+    - Importeer taakbeheer.sql in MySQL.
+
+4. Voer de migraties uit:
+   ```bash
+   php artisan migrate
+
+5. Start de server:
+   ```bash
+   php artisan serve
+
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
@@ -64,4 +89,3 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
